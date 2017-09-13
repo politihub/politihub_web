@@ -11,7 +11,7 @@ var messageRoutes = require('./routes/messages');
 var userRoutes = require('./routes/user');
 
 var app = express();
-mongoose.connect('localhost:27017/node-angular');
+mongoose.connect('test_user:NorthKoreaVersusTrump2017@ds133814.mlab.com:33814/politihub_deployment');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
