@@ -31,7 +31,7 @@ input.ng-invalid.ng-touched {
     background-color: white;
 }
 .navbar-form.navbar-left{
-  margin-left: 10%;
+  margin-left: 15%;
 }
 
 .container-fluid{
@@ -43,4 +43,7 @@ input.ng-invalid.ng-touched {
 .logo{
   height: 35px;
   width: 180px;
+}
+.nav.navbar-nav.navbar-right > a{
+  display: block;
 }

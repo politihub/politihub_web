@@ -22,7 +22,7 @@ import { Component } from "@angular/core";
           <ul class="nav navbar-nav navbar-right">
             <li><a [routerLink]="['/discover']"><span class="glyphicon glyphicon-dashboard"></span></a></li>
 
-            <li></li>
+            <li> <a href="#"><span class="glyphicon glyphicon-bell"></span></a>  </li>
             <li><a [routerLink]="['/auth']"><span class="glyphicon glyphicon-user"></span></a></li>
           </ul>
 
@@ -30,7 +30,7 @@ import { Component } from "@angular/core";
           </div>
         </nav>
 
-  <!-- <li><span class="glyphicon glyphicon-bell"></span></li> -->
+
 
     `
 })
