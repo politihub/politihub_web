@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
         <nav class="navbar navbar-default">
           <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" [routerLink]="['/messages']">
               <img class="logo" src="/images/logo.png" alt="">
             </a>
           </div>
@@ -22,7 +22,7 @@ import { Component } from "@angular/core";
           <ul class="nav navbar-nav navbar-right">
             <li><a [routerLink]="['/discover']"><span class="glyphicon glyphicon-dashboard"></span></a></li>
 
-            <li><a [routerLink]="['/messages']">Messenger</a></li>
+            <li></li>
             <li><a [routerLink]="['/auth']"><span class="glyphicon glyphicon-user"></span></a></li>
           </ul>
 
