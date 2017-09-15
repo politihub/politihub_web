@@ -3,14 +3,35 @@ import { Component } from "@angular/core";
 @Component({
     selector: 'app-header',
     template: `
-        <header class="row">
-            <nav class="col-md-8 col-md-offset-2">
-                <ul class="nav nav-pills">
-                    <li routerLinkActive="active"><a [routerLink]="['/messages']">Messenger</a></li>
-                    <li routerLinkActive="active"><a [routerLink]="['/auth']">Authentication</a></li>
-                </ul>
-            </nav>
-        </header>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+              <img class="logo" src="/images/logo.png" alt="">
+            </a>
+          </div>
+
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+          </form>
+
+
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a [routerLink]="['/discover']"><span class="glyphicon glyphicon-dashboard"></span></a></li>
+
+            <li><a [routerLink]="['/messages']">Messenger</a></li>
+            <li><a [routerLink]="['/auth']"><span class="glyphicon glyphicon-user"></span></a></li>
+          </ul>
+
+
+          </div>
+        </nav>
+
+  <!-- <li><span class="glyphicon glyphicon-bell"></span></li> -->
+
     `
 })
 export class HeaderComponent {

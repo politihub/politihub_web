@@ -1,6 +1,6 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #f8f8f8;
 }
 
 a {
@@ -24,4 +24,23 @@ a.danger {
 
 input.ng-invalid.ng-touched {
   border: 1px solid red;
+}
+
+/*NAVBAR*/
+.navbar-default {
+    background-color: white;
+}
+.navbar-form.navbar-left{
+  margin-left: 10%;
+}
+
+.container-fluid{
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+.logo{
+  height: 35px;
+  width: 180px;
 }
