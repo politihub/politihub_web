@@ -1,12 +1,10 @@
 <div>
     <div class="row">
         <div class="col-md-2 col-md-offset-5" style="text-align: center;">
-           
-           <button class="btn btn-primary" (click)="facebookLogin()">Continue With Facebook</button> <br/><br/>
-            OR<br/><br/>
-            <button class="btn btn-primary" id="googleBtn">Continue With Google</button><br/><br/>
-            OR<br/><br/>
-            CONTINUE TO SIGN UP WITH US<br/><br/>
+
+           <button class="btn btn-social btn-facebook" (click)="facebookLogin()">Continue With Facebook</button> <br/><br/>
+            <button class="btn btn-social btn-google" id="googleBtn">Continue With Google</button><br/><br/>
+            Or Sign-up with Politihub<br/><br/>
 
 
             <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
