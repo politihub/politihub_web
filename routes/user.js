@@ -26,6 +26,22 @@ router.post('/', function (req, res, next) {
     });
 });
 
+router.post('/exists', function (req, res, next) {
+    User.findOne({email: req.body.email}, function(err, user) {
+        if(user){
+            res.status(200).json({
+                message: 'true',
+                userId: user._id
+        });
+    } else{
+            res.status(200).json({
+                message: 'false',
+        });
+    }
+
+    });
+});
+
 router.post('/signin', function(req, res, next) {
     User.findOne({email: req.body.email}, function(err, user) {
         if (err) {

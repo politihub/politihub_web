@@ -11,6 +11,8 @@ import { ErrorComponent } from "./errors/error.component";
 import { ErrorService } from "./errors/error.service";
 import { MessageModule } from "./messages/message.module";
 import { DiscoverComponent } from "./discover/discover.component";
+import { FacebookModule } from 'ngx-facebook';
+
 
 @NgModule({
     declarations: [
@@ -24,7 +26,8 @@ import { DiscoverComponent } from "./discover/discover.component";
         BrowserModule,
         routing,
         HttpModule,
-        MessageModule
+        MessageModule,
+        FacebookModule.forRoot()
     ],
     providers: [AuthService, ErrorService],
     bootstrap: [AppComponent]
