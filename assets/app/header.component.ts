@@ -17,12 +17,35 @@ import { Component } from "@angular/core";
             </div>
           </form>
 
-
-
           <ul class="nav navbar-nav navbar-right">
+            
             <li><a [routerLink]="['/discover']"><span class="glyphicon glyphicon-dashboard"></span></a></li>
 
-            <li> <a href="#"><span class="glyphicon glyphicon-bell"></span></a>  </li>
+            <li class="dropdown dropdown-notifications">
+              <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
+              </a>
+
+              <div class="dropdown-container">
+
+                <div class="dropdown-toolbar">
+                  <div class="dropdown-toolbar-actions">
+                    <a href="#">Mark all as read</a>
+                  </div>
+                  <h3 class="dropdown-toolbar-title">Notifications (2)</h3>
+                </div><!-- /dropdown-toolbar -->
+
+                <ul class="dropdown-menu">
+                    ...
+                </ul>
+
+                <div class="dropdown-footer text-center">
+                  <a href="#">View All</a>
+                </div><!-- /dropdown-footer -->
+
+              </div><!-- /dropdown-container -->
+            </li><!-- /dropdown -->
+
             <li><a [routerLink]="['/auth']"><span class="glyphicon glyphicon-user"></span></a></li>
           </ul>
 
