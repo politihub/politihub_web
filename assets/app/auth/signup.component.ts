@@ -3,6 +3,12 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 import { AuthService } from "./auth.service";
 import { User } from "./user.model";
+import {FacebookService, LoginOptions, LoginResponse} from 'ngx-facebook';
+import { Router } from "@angular/router";
+
+
+declare const gapi: any;
+
 
 @Component({
     selector: 'app-signup',
@@ -11,21 +17,137 @@ import { User } from "./user.model";
 export class SignupComponent implements OnInit {
     myForm: FormGroup;
 
-    constructor(private authService: AuthService) {}
+    public auth2: any;
+
+    constructor(private authService: AuthService, private fb: FacebookService, private router: Router) 
+    {
+        this.googleInit();
+
+        this.fb.init({
+            appId: '118247712173533',
+            xfbml: true,
+            cookie: true,
+            version: 'v2.6'
+        });
+        
+}
+
+    public googleInit() {
+        gapi.load('auth2', () => {
+            this.auth2 = gapi.auth2.init({
+                client_id: '724212024060-i93r90vm7raj01viroet4mbqjivuiu21.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                scope: 'profile email'
+            });
+            this.attachSignin(document.getElementById('googleBtn'));
+        });
+    }
+
+    public attachSignin(element) {
+        this.auth2.attachClickHandler(element, {},
+            (googleUser) => {
+
+                var exists = true;
+
+                let profile = googleUser.getBasicProfile();
+                console.log('Token || ' + googleUser.getAuthResponse().id_token);
+                console.log('ID: ' + profile.getId());
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail());
+                //YOUR CODE HERE
+
+                // this.authService.userExists(profile.getEmail()).subscribe(
+                //     data => (console.log(data)), //, exists = data
+                //     error => console.error(error)
+                // );
+
+                if(!exists){
+                    var names =  profile.getName().split(" ");
+                    // console.log(names);
+    
+                    const user = new User(
+                        profile.getEmail(),
+                        profile.getId(),
+                        names[0],
+                        names[1]
+                    );
+        
+                    this.authService.signup(user)
+                    .subscribe(
+                        data => console.log(data),
+                        error => console.error(error)
+                    );
+                }
+                else{
+                    const user = new User(profile.getEmail(), profile.getId());
+                    this.authService.signin(user)
+                    .subscribe(
+                        data => {
+                            localStorage.setItem('token', data.token);
+                            localStorage.setItem('userId', data.userId);
+                            this.router.navigateByUrl('/');
+                        },
+                        error => console.error(error)
+                    );
+                }
+            }, (error) => {
+                alert(JSON.stringify(error, undefined, 2));
+            });
+    }
 
     facebookLogin()
     {
+        const loginOptions: LoginOptions = {
+            enable_profile_selector: true,
+            return_scopes: true,
+            scope: 'public_profile,user_friends,email'
+        };
+
         console.log("hey");
-        this.authService.facebookLogin();
+        this.fb.login(loginOptions)
+        .then((response: LoginResponse) => (console.log(response), this.fb.api('/me?fields=id,email,first_name,last_name')
+            .then(res => this.facebookHelper(res))
+            .catch(e => console.log(e))))
+        .catch((error: any) => console.error(error));
+
     }
 
-    onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    facebookHelper(res){
+        var exists = true;
+        // this.authService.userExists(res.email).subscribe(
+        //     data => (console.log(data)), //, exists = data
+        //     error => console.error(error)
+        // );
+
+        if(!exists){
+            const user = new User(
+                res.email,
+                res.id,
+                res.first_name,
+                res.last_name
+            );
+
+            this.authService.signup(user)
+            .subscribe(
+                data => console.log(data),
+                error => console.error(error)
+            );
+        }
+        else{
+            const user = new User(res.email, res.id);
+            this.authService.signin(user)
+            .subscribe(
+                data => {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userId', data.userId);
+                    this.router.navigateByUrl('/');
+                },
+                error => console.error(error)
+            );
+        }
     }
+
 
     onSubmit() {
         const user = new User(
