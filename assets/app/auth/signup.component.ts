@@ -57,42 +57,20 @@ export class SignupComponent implements OnInit {
                 console.log('Email: ' + profile.getEmail());
                 //YOUR CODE HERE
 
-                // this.authService.userExists(profile.getEmail()).subscribe(
-                //     data => (console.log(data)), //, exists = data
-                //     error => console.error(error)
-                // );
+                var names =  profile.getName().split(" ");
+                // console.log(names);
 
-                if(!exists){
-                    var names =  profile.getName().split(" ");
-                    // console.log(names);
-    
-                    const user = new User(
-                        profile.getEmail(),
-                        profile.getId(),
-                        names[0],
-                        names[1]
-                    );
-        
-                    this.authService.signup(user)
-                    .subscribe(
-                        data => console.log(data),
-                        error => console.error(error)
-                    );
-                }
-                else{
-                    const user = new User(profile.getEmail(), profile.getId());
-                    this.authService.signin(user)
-                    .subscribe(
-                        data => {
-                            localStorage.setItem('token', data.token);
-                            localStorage.setItem('userId', data.userId);
-                            this.router.navigateByUrl('/');
-                        },
-                        error => console.error(error)
-                    );
-                }
-            }, (error) => {
-                alert(JSON.stringify(error, undefined, 2));
+                var user = new User(
+                    profile.getEmail(),
+                    profile.getId(),
+                    names[0],
+                    names[1]
+                );
+
+                this.authService.userExists(user).subscribe(
+                    data => (console.log(data),  this.loginHelper(data, user)), //, exists = data
+                    error => console.error(error)
+                );
             });
     }
 
@@ -114,38 +92,38 @@ export class SignupComponent implements OnInit {
     }
 
     facebookHelper(res){
-        var exists = true;
-        // this.authService.userExists(res.email).subscribe(
-        //     data => (console.log(data)), //, exists = data
-        //     error => console.error(error)
-        // );
+        var user = new User(
+            res.email,
+            res.id,
+            res.first_name,
+            res.last_name
+        );
 
-        if(!exists){
-            const user = new User(
-                res.email,
-                res.id,
-                res.first_name,
-                res.last_name
-            );
+        this.authService.userExists(user).subscribe(
+            data => (console.log(data.message), this.loginHelper(data, user)),
+            error => console.error(error)
+        );
+    }
 
+    loginHelper(data, user){
+        if(data.message == "false"){
             this.authService.signup(user)
             .subscribe(
                 data => console.log(data),
                 error => console.error(error)
             );
         }
-        else{
-            const user = new User(res.email, res.id);
-            this.authService.signin(user)
-            .subscribe(
-                data => {
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('userId', data.userId);
-                    this.router.navigateByUrl('/');
-                },
-                error => console.error(error)
-            );
-        }
+
+        console.log('inside');
+        this.authService.signin(user)
+        .subscribe(
+            data => {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data.userId);
+                this.router.navigateByUrl('/');
+            },
+            error => console.error(error)
+        );
     }
 
 

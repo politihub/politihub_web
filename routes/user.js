@@ -28,7 +28,7 @@ router.post('/', function (req, res, next) {
 
 router.post('/exists', function (req, res, next) {
     console.log(req);
-    User.findOne({email: req}, function(err, user) {
+    User.findOne({email: req.body.email}, function(err, user) {
         if(user){
             res.status(200).json({
                 message: 'true',
