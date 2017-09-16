@@ -5,13 +5,14 @@
  */
 .dropdown-container {
   position: absolute;
+  /* float: right; */
   top: 100%;
-  left: 0;
+  right: 0;
   z-index: 1000;
   display: none;
   float: left;
-  min-width: 200px;
-  max-width: 330px;
+  /* min-width: 200px; */
+  width: 100px;
   margin: 2px 0 0;
   list-style: none;
   font-size: 14px;

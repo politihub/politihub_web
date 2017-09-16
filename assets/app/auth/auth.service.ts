@@ -36,17 +36,17 @@ export class AuthService {
             });
     }
 
-    userExists(email){
-        console.log(email);
-        const body = JSON.stringify(email);
+    userExists(user: User){
+        console.log(user);
+        const body = JSON.stringify(user);
         console.log(body);
         const headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post('user/exists', body, {headers: headers})
-        .map((response: Response) => response.json())
-        .catch((error: Response) => {
-            this.errorService.handleError(error.json());
-            return Observable.throw(error.json());
-        });
+                    .map((response: Response) => response.json())
+                    .catch((error: Response) => {
+                        this.errorService.handleError(error.json());
+                        return Observable.throw(error.json());
+                    });
     }
 
     logout() {
