@@ -72,4 +72,20 @@ router.post('/signin', function(req, res, next) {
     });
 });
 
+// router.use('/profile', function (req, res, next) {
+//     jwt.verify(req.query.token, 'secret', function (err, decoded) {
+//         if (err) {
+//             return res.status(401).json({
+//                 title: 'Not Authenticated',
+//                 error: err
+//             });
+//         }
+//         next();
+//     })
+// });
+
+// route.get('/profile', function(res, req, next){
+
+// });
+
 module.exports = router;
