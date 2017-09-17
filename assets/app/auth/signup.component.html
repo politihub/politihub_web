@@ -1,12 +1,12 @@
 <div>
     <div class="row">
-        <div class="col-md-2 col-md-offset-5" style="text-align: center;">
+        <div class=" col-md-2 col-md-offset-5" style="text-align: center;">
 
            <button class="btn btn-facebook waves-effect waves-light" (click)="facebookLogin()"> <i class="fa fa-facebook left"></i> Continue With Facebook</button> <br/><br/>
             <button class="btn btn-google waves-effect waves-light" id="googleBtn"> <i class="fa fa-google-plus left"></i> Continue With Google</button><br/><br/>
             Or Sign-up with Politihub<br/><br/>
 
-
+        <div class="col-sm-4 col-sm-offset-4" style="text-align: center;" >
             <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
@@ -25,7 +25,7 @@
                             formControlName="lastName">
                 </div>
                 <div class="form-group">
-                    <label for="email">Mail</label>
+                    <label for="email">Email</label>
                     <input
                             type="email"
                             id="email"
@@ -45,6 +45,7 @@
                         type="submit"
                         [disabled]="!myForm.valid">Submit</button>
             </form>
+        </div>
 
         </div>
     </div>
