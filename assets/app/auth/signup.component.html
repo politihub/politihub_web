@@ -4,9 +4,10 @@
 
            <button class="btn btn-facebook waves-effect waves-light" (click)="facebookLogin()"> <i class="fa fa-facebook left"></i> Continue With Facebook</button> <br/><br/>
             <button class="btn btn-google waves-effect waves-light" id="googleBtn"> <i class="fa fa-google-plus left"></i> Continue With Google</button><br/><br/>
-            Or Sign-up with Politihub<br/><br/>
+            Or Sign-up with <br/>
 
         <div class="col-sm-4 col-sm-offset-4" style="text-align: center;" >
+            <img class="logo" src="/images/logo.png" alt=""> <br/><br/>
             <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
