@@ -11,6 +11,7 @@ import { ErrorComponent } from "./errors/error.component";
 import { ErrorService } from "./errors/error.service";
 import { MessageModule } from "./messages/message.module";
 import { DiscoverComponent } from "./discover/discover.component";
+import { ProfileComponent } from "./auth/profile.component";
 
 import { FacebookModule } from 'ngx-facebook';
 
@@ -22,6 +23,7 @@ import { FacebookModule } from 'ngx-facebook';
         HeaderComponent,
         ErrorComponent,
         DiscoverComponent,
+        ProfileComponent
     ],
     imports: [
         BrowserModule,
