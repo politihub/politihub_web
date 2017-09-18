@@ -14,13 +14,16 @@ export class MessageService {
     constructor(private http: Http, private errorService: ErrorService) {
     }
 
+    //private domain = "https://politihub-app.herokuapp.com/";
+    private domain = "http://localhost:3000/";
+
     addMessage(message: Message) {
         const body = JSON.stringify(message);
         const headers = new Headers({'Content-Type': 'application/json'});
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.post('https://politihub-app.herokuapp.com/message' + token, body, {headers: headers})
+        return this.http.post(this.domain + 'message' + token, body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json();
                 const message = new Message(
@@ -38,7 +41,7 @@ export class MessageService {
     }
 
     getMessages() {
-        return this.http.get('https://politihub-app.herokuapp.com/message')
+        return this.http.get(this.domain + 'message')
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: Message[] = [];
@@ -69,7 +72,7 @@ export class MessageService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.patch('https://politihub-app.herokuapp.com/message/' + message.messageId + token, body, {headers: headers})
+        return this.http.patch(this.domain + 'message/' + message.messageId + token, body, {headers: headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -82,7 +85,7 @@ export class MessageService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.delete('https://politihub-app.herokuapp.com/message/' + message.messageId + token)
+        return this.http.delete(this.domain + 'message/' + message.messageId + token)
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
