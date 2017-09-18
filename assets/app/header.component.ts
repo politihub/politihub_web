@@ -46,7 +46,7 @@ import { Component } from "@angular/core";
               </div><!-- /dropdown-container -->
             </li><!-- /dropdown -->
 
-            <li><a [routerLink]="['/auth']"><span class="glyphicon glyphicon-user"></span></a></li>
+            <li><a [routerLink]="['/auth/profile']"><span class="glyphicon glyphicon-user"></span></a></li>
           </ul>
 
 
